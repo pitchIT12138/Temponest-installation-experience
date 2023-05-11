@@ -334,7 +334,7 @@ TempoNest的输出可以分为两类，一类是由MultiNest直接生成的文�
 1. MultiNest Output
 进度监控： MultiNest在每500次迭代后会生成physlive.dat和ev.dat文件，可以用来监控进度。这两个文件的格式和内容如下：`[root] physlive.dat`此文件包含当前的活动点集。它有ndim+2列。前ndim列是ndim参数值。ndim+1列是对数似然值，最后一列是节点编号（用于聚类）。
 ![image](./img/TempoNest手册翻译/Pasted%20image%2020230331123049.png)
-![image](.\img\TempoNest手册翻译\Pasted%20image%2020230331123105.png)
+![image](./img/TempoNest手册翻译/Pasted%20image%2020230331123105.png)
 
 `[root]ev.dat` 该文件包含被拒绝的点的集合。它有ndim+3列。前ndim列是ndim参数值。第ndim+1列是对数似然值，ndim+2列是对数（先验概率）和最后一列是节点编号（用于聚类）。
 
@@ -378,14 +378,14 @@ FitSig = 4;
 `tempo2 −gr temponest −f J0030+0451.par J0030+0451.tim`
 当TempoNest首次运行时，您将看到Tempo2执行拟合过程的输出。然后MultiNest将开始运行。当MultiNest退出时，您应该看到类似于表I的输出，此时采样已完成，结果应在输出文件夹中以“Example1-J0030 + 0451-”和文件类型命名。 TempoNest包括一个简单的Python绘图工具，允许您可视化拟合中包含的任何模型参数的后验概率分布。它位于源目录中与其他TempoNest文件一起，并称为`triplot.py`。可以使用以下语法从命令行中使用它：
 `python triplot.py -f Examples/Example1/results/White-J0030+0451`
-![image](.\img\TempoNest手册翻译\Pasted%20image%2020230331123714.png)
+![image](./img/TempoNest手册翻译/Pasted%20image%2020230331123714.png)
 表格I. TempoNest计算的定时模型参数估计值与Tempo2的最佳拟合值相比。在这个例子中只包括白噪声和定时模型，因此参数估计非常一致。
 同时，你可以通过运行来绘制类似于图2的图形，该图显示了拟合中包含的参数的一维和二维边缘后验概率分布，即该参数取特定值的概率。
 2. Example 2: Timing Model and Red Noise - Power Law Model
 第二个例子的tim和par文件位于Examples/Example2文件夹中。这里除了白噪声和定时模型之外，还增加了一个具有log振幅为-13.301和谱指数为-4.333的红噪声功率谱。
 
 对于第二个例子，我们需要修改`TempoNest-Params.c`文件中的一些参数。特别是，我们现在需要更改根文件名，并指定我们希望将功率律红噪声组件包括在我们的模型中（`incRED=1`）。此外，我们希望完全边缘化定时模型（`doTimeMargin=2`），但希望在联合参数空间的最大似然点处执行定时模型的线性化（即在包括红噪声时的定时模型的最大似然解），而不是使用初始的Tempo2拟合（`doMax=1`）。
-![image](.\img\TempoNest手册翻译\Pasted%20image%2020230331124025.png)
+![image](./img/TempoNest手册翻译/Pasted%20image%2020230331124025.png)
 下面列出了设置。
 
 ```bash
@@ -399,7 +399,7 @@ doJumpMargin = 0;
 customPriors = 0;
 ```
 
-![image](.\img\TempoNest手册翻译\Pasted%20image%2020230331124127.png)
+![image](./img/TempoNest手册翻译/Pasted%20image%2020230331124127.png)
 表II。例2中基于时间模型的解析边际化红噪声频谱的随机参数估计。
 
 ```bash
@@ -425,7 +425,7 @@ Max Red Index: 3.78608546
 ```
 
 然后，TempoNest将对时间模型参数进行边际化，并对红噪声频谱进行贝叶斯分析，其结果类似于表II中的结果。然后，我们可以使用以下方法绘制随机参数的后验分布：
-![image](.\img\TempoNest手册翻译\Pasted%20image%2020230331124358.png)
+![image](./img/TempoNest手册翻译/Pasted%20image%2020230331124358.png)
 图3. 例2的红噪声振幅和谱指数的一维和二维后验分布。
 `python triplot.py -f Examples/Example2/results/Red-J0030+0451`
 这将显示一个类似于图3的图像。
